@@ -7,7 +7,17 @@ import {
   CardTitle,
 } from "./ui/card";
 
-const FeatureProduct = () => {
+interface medicineType {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: {
+    name: string;
+  };
+}
+
+const FeatureProduct = ({ medicine }: { medicine: medicineType[] }) => {
   const featured = [
     {
       id: 1,
@@ -45,20 +55,17 @@ const FeatureProduct = () => {
           Featured Products
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {featured.map((product) => (
+          {medicine.slice(0, 4).map((product) => (
             <Link key={product.id} href={`/shop/${product.id}`}>
               <Card className="hover:shadow-lg transition-shadow h-full cursor-pointer">
                 <CardHeader>
                   <CardTitle className="text-lg">{product.name}</CardTitle>
-                  <CardDescription>{product.category}</CardDescription>
+                  <CardDescription>{product.category.name}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="flex justify-between items-center">
                     <span className="text-2xl font-bold text-primary">
-                      {product.price}
-                    </span>
-                    <span className="text-sm text-muted-foreground">
-                      ⭐ {product.rating}
+                      {product.price} tk
                     </span>
                   </div>
                 </CardContent>

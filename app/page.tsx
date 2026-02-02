@@ -1,20 +1,22 @@
-"use client";
-
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import HeroSection from "@/components/homepage/hero";
 import CategorySection from "@/components/category-section";
 import FeatureProduct from "@/components/feature-product";
 import Seller from "@/components/homepage/seller";
+import { homeService } from "./service/home.service";
 
-export default function Home() {
+export default async function Home() {
+  const { data } = await homeService.getCategories();
+  const { data: medicine } = await homeService.getMedicines();
+  console.log(data);
   return (
     <>
       <Header />
       <main className="min-h-screen bg-background">
         <HeroSection />
-        <CategorySection />
-        <FeatureProduct />
+        <CategorySection data={data?.data} />
+        <FeatureProduct medicine={medicine?.data} />
         <Seller />
       </main>
       <Footer />
