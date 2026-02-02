@@ -24,23 +24,19 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.email("Invalid email address"),
   password: z.string().min(6, "Password must be at least 6 characters"),
-  role: z.enum(["CUSTOMER", "SELLER"]),
 });
-export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
   const handleLoginWithGoogle = () => {
     const data = authClient.signIn.social({
       provider: "google",
-      callbackURL: process.env.FRONTEND_URL,
+      callbackURL: process.env.NEXT_PUBLIC_FRONTEND_URL,
     });
     console.log(data);
   };
   const form = useForm({
     defaultValues: {
-      role: "",
-      name: "",
       email: "",
       password: "",
     },
@@ -49,19 +45,19 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
     },
     onSubmit: async ({ value }) => {
       console.log(value);
-      const toastId = toast.loading("Creating your account...");
+      const toastId = toast.loading("Logging your account...");
       try {
-        const { data, error } = await authClient.signUp.email(value);
+        const { data, error } = await authClient.signIn.email(value);
         if (error) {
           toast.error(error.message, { id: toastId });
           return;
         }
-        toast.success("Account created! Please check your email to verify.", {
+        toast.success("Log in Successfully", {
           id: toastId,
         });
         form.reset();
       } catch (error) {
-        toast.error("Failed to create account", { id: toastId });
+        toast.error("Failed to login", { id: toastId });
       }
     },
   });
@@ -73,7 +69,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
             💊
           </div>
         </div>
-        <CardTitle>Create Account</CardTitle>
+        <CardTitle>Login Account</CardTitle>
         <CardDescription>Join MediStore today</CardDescription>
       </CardHeader>
       <CardContent>
@@ -84,73 +80,6 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
             form.handleSubmit();
           }}
         >
-          <FieldGroup>
-            <form.Field
-              name="role"
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
-                  <Field>
-                    <Label className="block mb-3">I want to register as</Label>
-                    <RadioGroup
-                      value={field.state.value}
-                      onValueChange={(val) =>
-                        field.handleChange(val as "customer" | "seller")
-                      }
-                    >
-                      <div className="flex items-center space-x-2 mb-2">
-                        <RadioGroupItem value="CUSTOMER" id="customer" />
-                        <Label
-                          htmlFor="customer"
-                          className="font-normal cursor-pointer"
-                        >
-                          Customer
-                        </Label>
-                      </div>
-                      <div className="flex items-center space-x-2 mb-5">
-                        <RadioGroupItem value="SELLER" id="seller" />
-                        <Label
-                          htmlFor="seller"
-                          className="font-normal cursor-pointer"
-                        >
-                          Seller
-                        </Label>
-                      </div>
-                    </RadioGroup>
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
-            />
-          </FieldGroup>
-          <FieldGroup>
-            <form.Field
-              name="name"
-              children={(field) => {
-                const isInvalid =
-                  field.state.meta.isTouched && !field.state.meta.isValid;
-                return (
-                  <Field>
-                    <FieldLabel htmlFor={field.name}>Name</FieldLabel>
-                    <Input
-                      type="text"
-                      name={field.name}
-                      id={field.name}
-                      placeholder="Enter your name"
-                      value={field.state.value}
-                      onChange={(e) => field.handleChange(e.target.value)}
-                    />
-                    {isInvalid && (
-                      <FieldError errors={field.state.meta.errors} />
-                    )}
-                  </Field>
-                );
-              }}
-            />
-          </FieldGroup>
           <FieldGroup>
             <form.Field
               name="email"

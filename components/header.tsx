@@ -1,30 +1,30 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { ThemeToggle } from '@/components/theme-toggle'
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
   DropdownMenuSeparator,
-} from '@/components/ui/dropdown-menu'
-import { ShoppingCart, Search, Menu, User, LogOut } from 'lucide-react'
-import { useState } from 'react'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+} from "@/components/ui/dropdown-menu";
+import { ShoppingCart, Search, Menu, User, LogOut } from "lucide-react";
+import { useState } from "react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
-  const router = useRouter()
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const [userRole, setUserRole] = useState<string | null>(null)
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState<string | null>(null);
 
   const handleLogout = () => {
-    setIsLoggedIn(false)
-    setUserRole(null)
-  }
+    setIsLoggedIn(false);
+    setUserRole(null);
+  };
 
   return (
     <header className="border-b bg-background sticky top-0 z-50">
@@ -120,10 +120,10 @@ export function Header() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
                     <DropdownMenuItem disabled className="font-medium">
-                      {userRole === 'seller' ? 'Seller Dashboard' : 'Customer'}
+                      {userRole === "seller" ? "Seller Dashboard" : "Customer"}
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    {userRole === 'seller' ? (
+                    {userRole === "seller" ? (
                       <>
                         <DropdownMenuItem asChild>
                           <Link href="/seller/dashboard">Dashboard</Link>
@@ -135,7 +135,7 @@ export function Header() {
                           <Link href="/seller/orders">Orders</Link>
                         </DropdownMenuItem>
                       </>
-                    ) : userRole === 'admin' ? (
+                    ) : userRole === "admin" ? (
                       <>
                         <DropdownMenuItem asChild>
                           <Link href="/admin">Dashboard</Link>
@@ -190,5 +190,5 @@ export function Header() {
         </div>
       </div>
     </header>
-  )
+  );
 }

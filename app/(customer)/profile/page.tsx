@@ -1,81 +1,81 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useForm } from '@tanstack/react-form'
-import { zodValidator } from '@tanstack/zod-form-adapter'
-import { z } from 'zod'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { Separator } from '@/components/ui/separator'
-import { toast } from 'sonner'
+import { useState } from "react";
+import { useForm } from "@tanstack/react-form";
+import { zodValidator } from "@tanstack/zod-form-adapter";
+import { z } from "zod";
+import { Footer } from "@/components/footer";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "sonner";
 
 const profileSchema = z.object({
-  fullName: z.string().min(2, 'Name required'),
-  email: z.string().email('Invalid email'),
-  phone: z.string().min(10, 'Invalid phone'),
-})
+  fullName: z.string().min(2, "Name required"),
+  email: z.string().email("Invalid email"),
+  phone: z.string().min(10, "Invalid phone"),
+});
 
-const passwordSchema = z.object({
-  currentPassword: z.string().min(6, 'Password required'),
-  newPassword: z.string().min(6, 'Password must be 6+ characters'),
-  confirmPassword: z.string(),
-}).refine((data) => data.newPassword === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ["confirmPassword"],
-})
+const passwordSchema = z
+  .object({
+    currentPassword: z.string().min(6, "Password required"),
+    newPassword: z.string().min(6, "Password must be 6+ characters"),
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    message: "Passwords don't match",
+    path: ["confirmPassword"],
+  });
 
 export default function ProfilePage() {
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const profileForm = useForm({
     defaultValues: {
-      fullName: 'John Doe',
-      email: 'john@example.com',
-      phone: '+1-555-0123',
+      fullName: "John Doe",
+      email: "john@example.com",
+      phone: "+1-555-0123",
     },
     onSubmit: async (values) => {
-      setIsLoading(true)
+      setIsLoading(true);
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        toast.success('Profile updated!')
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        toast.success("Profile updated!");
       } catch (error) {
-        toast.error('Failed to update profile')
+        toast.error("Failed to update profile");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
     validatorAdapter: zodValidator(),
-  })
+  });
 
   const passwordForm = useForm({
     defaultValues: {
-      currentPassword: '',
-      newPassword: '',
-      confirmPassword: '',
+      currentPassword: "",
+      newPassword: "",
+      confirmPassword: "",
     },
     onSubmit: async (values) => {
-      setIsLoading(true)
+      setIsLoading(true);
       try {
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        toast.success('Password changed!')
-        passwordForm.reset()
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        toast.success("Password changed!");
+        passwordForm.reset();
       } catch (error) {
-        toast.error('Failed to change password')
+        toast.error("Failed to change password");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
     },
     validatorAdapter: zodValidator(),
-  })
+  });
 
   return (
     <>
-      <Header />
       <main className="min-h-screen bg-background">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <h1 className="text-3xl font-bold mb-8">My Profile</h1>
@@ -96,8 +96,8 @@ export default function ProfilePage() {
                 <CardContent>
                   <form
                     onSubmit={(e) => {
-                      e.preventDefault()
-                      profileForm.handleSubmit()
+                      e.preventDefault();
+                      profileForm.handleSubmit();
                     }}
                     className="space-y-6"
                   >
@@ -114,7 +114,9 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
@@ -134,7 +136,9 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
@@ -153,14 +157,16 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
                     />
 
                     <Button type="submit" disabled={isLoading}>
-                      {isLoading ? 'Saving...' : 'Save Changes'}
+                      {isLoading ? "Saving..." : "Save Changes"}
                     </Button>
                   </form>
                 </CardContent>
@@ -172,31 +178,47 @@ export default function ProfilePage() {
               <Card>
                 <CardHeader className="flex flex-row items-center justify-between">
                   <CardTitle>Saved Addresses</CardTitle>
-                  <Button variant="outline" size="sm">Add Address</Button>
+                  <Button variant="outline" size="sm">
+                    Add Address
+                  </Button>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="border rounded-lg p-4">
                     <div className="flex justify-between items-start mb-2">
                       <p className="font-semibold">Home</p>
                       <div className="space-x-2">
-                        <Button variant="ghost" size="sm">Edit</Button>
-                        <Button variant="ghost" size="sm">Delete</Button>
+                        <Button variant="ghost" size="sm">
+                          Edit
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          Delete
+                        </Button>
                       </div>
                     </div>
                     <p className="text-sm text-muted-foreground">123 Main St</p>
-                    <p className="text-sm text-muted-foreground">New York, 10001</p>
+                    <p className="text-sm text-muted-foreground">
+                      New York, 10001
+                    </p>
                   </div>
 
                   <div className="border rounded-lg p-4">
                     <div className="flex justify-between items-start mb-2">
                       <p className="font-semibold">Work</p>
                       <div className="space-x-2">
-                        <Button variant="ghost" size="sm">Edit</Button>
-                        <Button variant="ghost" size="sm">Delete</Button>
+                        <Button variant="ghost" size="sm">
+                          Edit
+                        </Button>
+                        <Button variant="ghost" size="sm">
+                          Delete
+                        </Button>
                       </div>
                     </div>
-                    <p className="text-sm text-muted-foreground">456 Office Blvd</p>
-                    <p className="text-sm text-muted-foreground">New York, 10002</p>
+                    <p className="text-sm text-muted-foreground">
+                      456 Office Blvd
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      New York, 10002
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -211,17 +233,21 @@ export default function ProfilePage() {
                 <CardContent>
                   <form
                     onSubmit={(e) => {
-                      e.preventDefault()
-                      passwordForm.handleSubmit()
+                      e.preventDefault();
+                      passwordForm.handleSubmit();
                     }}
                     className="space-y-6"
                   >
                     <passwordForm.Field
                       name="currentPassword"
-                      validators={{ onChange: passwordSchema.shape.currentPassword }}
+                      validators={{
+                        onChange: passwordSchema.shape.currentPassword,
+                      }}
                       children={(field) => (
                         <div>
-                          <Label htmlFor="currentPassword">Current Password</Label>
+                          <Label htmlFor="currentPassword">
+                            Current Password
+                          </Label>
                           <Input
                             id="currentPassword"
                             type="password"
@@ -230,7 +256,9 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
@@ -240,7 +268,9 @@ export default function ProfilePage() {
 
                     <passwordForm.Field
                       name="newPassword"
-                      validators={{ onChange: passwordSchema.shape.newPassword }}
+                      validators={{
+                        onChange: passwordSchema.shape.newPassword,
+                      }}
                       children={(field) => (
                         <div>
                           <Label htmlFor="newPassword">New Password</Label>
@@ -252,7 +282,9 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
@@ -260,10 +292,14 @@ export default function ProfilePage() {
 
                     <passwordForm.Field
                       name="confirmPassword"
-                      validators={{ onChange: passwordSchema.shape.confirmPassword }}
+                      validators={{
+                        onChange: passwordSchema.shape.confirmPassword,
+                      }}
                       children={(field) => (
                         <div>
-                          <Label htmlFor="confirmPassword">Confirm Password</Label>
+                          <Label htmlFor="confirmPassword">
+                            Confirm Password
+                          </Label>
                           <Input
                             id="confirmPassword"
                             type="password"
@@ -272,14 +308,16 @@ export default function ProfilePage() {
                             disabled={isLoading}
                           />
                           {field.state.meta.errors.length > 0 && (
-                            <p className="text-xs text-destructive mt-1">{field.state.meta.errors[0]}</p>
+                            <p className="text-xs text-destructive mt-1">
+                              {field.state.meta.errors[0]}
+                            </p>
                           )}
                         </div>
                       )}
                     />
 
                     <Button type="submit" disabled={isLoading}>
-                      {isLoading ? 'Updating...' : 'Update Password'}
+                      {isLoading ? "Updating..." : "Update Password"}
                     </Button>
                   </form>
                 </CardContent>
@@ -290,5 +328,5 @@ export default function ProfilePage() {
       </main>
       <Footer />
     </>
-  )
+  );
 }
