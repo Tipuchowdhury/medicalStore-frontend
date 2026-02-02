@@ -1,63 +1,106 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Sidebar } from '@/components/sidebar'
-import { Header } from '@/components/header'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Badge } from '@/components/ui/badge'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { useState } from "react";
+import { Sidebar } from "@/components/sidebar";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Search, MoreVertical } from 'lucide-react'
-import { toast } from 'sonner'
+} from "@/components/ui/select";
+import { Search, MoreVertical } from "lucide-react";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from "@/components/ui/dropdown-menu";
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState([
-    { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Customer', joinDate: '2024-01-10', status: 'Active' },
-    { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'Seller', joinDate: '2024-01-05', status: 'Active' },
-    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'Customer', joinDate: '2024-01-08', status: 'Active' },
-    { id: 4, name: 'Alice Williams', email: 'alice@example.com', role: 'Seller', joinDate: '2023-12-28', status: 'Inactive' },
-    { id: 5, name: 'Charlie Brown', email: 'charlie@example.com', role: 'Customer', joinDate: '2024-01-12', status: 'Active' },
-  ])
-  const [searchTerm, setSearchTerm] = useState('')
+    {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com",
+      role: "Customer",
+      joinDate: "2024-01-10",
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "Jane Smith",
+      email: "jane@example.com",
+      role: "Seller",
+      joinDate: "2024-01-05",
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Bob Johnson",
+      email: "bob@example.com",
+      role: "Customer",
+      joinDate: "2024-01-08",
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "Alice Williams",
+      email: "alice@example.com",
+      role: "Seller",
+      joinDate: "2023-12-28",
+      status: "Inactive",
+    },
+    {
+      id: 5,
+      name: "Charlie Brown",
+      email: "charlie@example.com",
+      role: "Customer",
+      joinDate: "2024-01-12",
+      status: "Active",
+    },
+  ]);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  const filtered = users.filter(u =>
-    u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    u.email.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filtered = users.filter(
+    (u) =>
+      u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      u.email.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
   const toggleUserStatus = (id: number) => {
-    setUsers(users.map(u =>
-      u.id === id
-        ? { ...u, status: u.status === 'Active' ? 'Inactive' : 'Active' }
-        : u
-    ))
-    toast.success('User status updated')
-  }
+    setUsers(
+      users.map((u) =>
+        u.id === id
+          ? { ...u, status: u.status === "Active" ? "Inactive" : "Active" }
+          : u,
+      ),
+    );
+    toast.success("User status updated");
+  };
 
   const deleteUser = (id: number) => {
-    setUsers(users.filter(u => u.id !== id))
-    toast.success('User deleted')
-  }
+    setUsers(users.filter((u) => u.id !== id));
+    toast.success("User deleted");
+  };
 
   return (
     <div className="flex h-screen bg-background">
       <Sidebar role="admin" />
       <div className="flex-1 overflow-auto">
-        <Header />
         <main className="p-6">
           <div className="max-w-7xl">
             <h1 className="text-3xl font-bold mb-8">User Management</h1>
@@ -79,7 +122,9 @@ export default function AdminUsersPage() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Total Users</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                    Total Users
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="text-2xl font-bold">{users.length}</div>
@@ -87,18 +132,26 @@ export default function AdminUsersPage() {
               </Card>
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Active Users</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                    Active Users
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{users.filter(u => u.status === 'Active').length}</div>
+                  <div className="text-2xl font-bold">
+                    {users.filter((u) => u.status === "Active").length}
+                  </div>
                 </CardContent>
               </Card>
               <Card>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">Sellers</CardTitle>
+                  <CardTitle className="text-sm font-medium text-muted-foreground">
+                    Sellers
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{users.filter(u => u.role === 'Seller').length}</div>
+                  <div className="text-2xl font-bold">
+                    {users.filter((u) => u.role === "Seller").length}
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -120,14 +173,24 @@ export default function AdminUsersPage() {
                   <TableBody>
                     {filtered.map((user) => (
                       <TableRow key={user.id}>
-                        <TableCell className="font-medium">{user.name}</TableCell>
+                        <TableCell className="font-medium">
+                          {user.name}
+                        </TableCell>
                         <TableCell>{user.email}</TableCell>
                         <TableCell>
                           <Badge variant="outline">{user.role}</Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-muted-foreground">{user.joinDate}</TableCell>
+                        <TableCell className="text-sm text-muted-foreground">
+                          {user.joinDate}
+                        </TableCell>
                         <TableCell>
-                          <Badge className={user.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'}>
+                          <Badge
+                            className={
+                              user.status === "Active"
+                                ? "bg-green-100 text-green-800"
+                                : "bg-gray-100 text-gray-800"
+                            }
+                          >
                             {user.status}
                           </Badge>
                         </TableCell>
@@ -139,10 +202,16 @@ export default function AdminUsersPage() {
                               </Button>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
-                              <DropdownMenuItem onClick={() => toggleUserStatus(user.id)}>
-                                {user.status === 'Active' ? 'Ban User' : 'Unban User'}
+                              <DropdownMenuItem
+                                onClick={() => toggleUserStatus(user.id)}
+                              >
+                                {user.status === "Active"
+                                  ? "Ban User"
+                                  : "Unban User"}
                               </DropdownMenuItem>
-                              <DropdownMenuItem onClick={() => deleteUser(user.id)}>
+                              <DropdownMenuItem
+                                onClick={() => deleteUser(user.id)}
+                              >
                                 Delete User
                               </DropdownMenuItem>
                             </DropdownMenuContent>
@@ -158,5 +227,5 @@ export default function AdminUsersPage() {
         </main>
       </div>
     </div>
-  )
+  );
 }

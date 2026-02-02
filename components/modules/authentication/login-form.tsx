@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 // import { env } from "@/env";
 import { useForm } from "@tanstack/react-form";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import * as z from "zod";
 
@@ -28,6 +29,7 @@ const formSchema = z.object({
   password: z.string().min(6, "Password must be at least 6 characters"),
 });
 export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
+  const router = useRouter();
   const handleLoginWithGoogle = () => {
     const data = authClient.signIn.social({
       provider: "google",
@@ -55,7 +57,9 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
         toast.success("Log in Successfully", {
           id: toastId,
         });
+        console.log(data);
         form.reset();
+        router.push("/");
       } catch (error) {
         toast.error("Failed to login", { id: toastId });
       }
