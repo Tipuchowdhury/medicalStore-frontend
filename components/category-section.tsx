@@ -14,7 +14,7 @@ const CategorySection = ({ data }: { data: categoryType[] }) => {
           Browse Categories
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {data.map((cat) => (
+          {data?.map((cat) => (
             <Link key={cat.id} href={`/shop?category=${cat.name}`}>
               <Card className="hover:shadow-lg transition-shadow cursor-pointer h-full">
                 <CardContent className="pt-6 text-center">

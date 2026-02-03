@@ -25,7 +25,7 @@ const FeatureProduct = ({ medicine }: { medicine: medicineType[] }) => {
           Featured Products
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {medicine.slice(0, 4).map((product) => (
+          {medicine?.slice(0, 4).map((product) => (
             <Link key={product.id} href={`/shop/${product.id}`}>
               <Card className="hover:shadow-lg transition-shadow h-full cursor-pointer">
                 <CardHeader>
