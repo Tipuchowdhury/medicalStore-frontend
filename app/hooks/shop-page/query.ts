@@ -56,3 +56,10 @@ export const getAllMedicineBySeller = async () => {
   );
   return result.json();
 };
+
+export const getSellerOrder = async () => {
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/order/seller`,
+  );
+  return result.json();
+};

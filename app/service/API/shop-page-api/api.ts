@@ -3,6 +3,7 @@ import {
   getAllMedicineBySeller,
   getMedicineByID,
   getMedicines,
+  getSellerOrder,
 } from "@/app/hooks/shop-page/query";
 import { useQuery } from "@tanstack/react-query";
 
@@ -38,5 +39,12 @@ export const useGetMedicineForSeller = () => {
   return useQuery({
     queryKey: ["medicine-by-id-for-seller"],
     queryFn: () => getAllMedicineBySeller(),
+  });
+};
+
+export const useGetOrderForSeller = () => {
+  return useQuery({
+    queryKey: ["order-by-seller"],
+    queryFn: () => getSellerOrder(),
   });
 };

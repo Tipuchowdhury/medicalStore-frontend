@@ -23,8 +23,11 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Eye } from "lucide-react";
 import { toast } from "sonner";
+import { useGetOrderForSeller } from "@/app/service/API/shop-page-api/api";
 
 export default function SellerOrdersPage() {
+  const { data: ordersData, isLoading } = useGetOrderForSeller();
+  console.log(ordersData);
   const [orders, setOrders] = useState([
     {
       id: "ORD-001",
