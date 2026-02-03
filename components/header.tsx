@@ -55,7 +55,7 @@ export function Header() {
 
           {/* Actions */}
           <div className="flex items-center gap-2 sm:gap-4">
-            {role === "CUSTOMER" ? (
+            {/* {role === "CUSTOMER" ? (
               <Link href="/cart" className="relative">
                 <Button variant="ghost" size="icon">
                   <ShoppingCart className="w-5 h-5" />
@@ -64,7 +64,7 @@ export function Header() {
                   </span>
                 </Button>
               </Link>
-            ) : null}
+            ) : null} */}
 
             <ThemeToggle />
 

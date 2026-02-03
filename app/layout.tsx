@@ -10,7 +10,7 @@ import Providers from "./providers";
 export const metadata: Metadata = {
   title: "MediStore - Online Medicine Shop",
   description: "Buy over-the-counter medicines online with fast delivery",
-  generator: "v0.app",
+  generator: "Tipu Chowdhury",
   icons: {
     icon: [
       {
