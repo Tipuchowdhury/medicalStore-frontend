@@ -1,3 +1,5 @@
+import { createMedicineType } from "@/types/allTypes";
+
 export const getMedicines = async (params: {
   category?: string | null;
   //   sort: string;
@@ -26,9 +28,24 @@ export const getAllCaterogy = async () => {
 };
 
 export const getMedicineByID = async (id: string) => {
-  console.log("I am herererere");
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/medicine/${id}`,
   );
   return result.json();
+};
+
+export const createOrder = async (data: createMedicineType) => {
+  try {
+    const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/order`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return result.json();
+  } catch (error) {
+    console.log("error");
+    throw error;
+  }
 };

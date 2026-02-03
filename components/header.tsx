@@ -82,6 +82,18 @@ export function Header() {
                   ) : (
                     ""
                   )}
+
+                  {role === "SELLER" ? (
+                    <>
+                      <Link href="/seller/dashboard" className="font-medium">
+                        Seller Dashboard
+                      </Link>
+                    </>
+                  ) : (
+                    <Link href="/admin" className="font-medium">
+                      Admin Dashboard
+                    </Link>
+                  )}
                   {isLoggedIn ? (
                     <>
                       <Link href="/orders" className="font-medium">
@@ -121,6 +133,18 @@ export function Header() {
                   <Button variant="ghost">Shop</Button>
                 </Link>
               ) : null}
+
+              {role === "SELLER" ? (
+                <>
+                  <Link href="/seller/dashboard" className="font-medium">
+                    Seller Dashboard
+                  </Link>
+                </>
+              ) : (
+                <Link href="/admin" className="font-medium">
+                  Admin Dashboard
+                </Link>
+              )}
 
               {isLoggedIn ? (
                 <DropdownMenu>

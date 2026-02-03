@@ -11,3 +11,12 @@ export interface medicineTypes {
     name: string;
   };
 }
+
+export interface createMedicineType {
+  items: [
+    {
+      medicineId: string;
+      quantity: number;
+    },
+  ];
+}

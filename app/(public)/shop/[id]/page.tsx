@@ -15,11 +15,13 @@ import { Star, ShoppingCart, ChevronLeft } from "lucide-react";
 import { toast } from "sonner";
 import { useGetMedicineById } from "@/app/service/API/shop-page-api/api";
 import { string } from "zod";
+import { useCreateOrderMutation } from "@/app/service/API/mutation";
+import { createOrder } from "../../../hooks/shop-page/query";
 
 export default function MedicineDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
-
+  const createOrderMutation = useCreateOrderMutation();
   const { data: medicineData, isLoading } = useGetMedicineById(id as string);
   console.log(medicineData);
   console.log(id);
@@ -29,6 +31,16 @@ export default function MedicineDetailsPage() {
 
   const handleAddToCart = () => {
     // toast.success(`Added ${quantity} ${medicine.name} to cart`);
+    console.log(medicineData?.data);
+    const _data = createOrderMutation.mutate({
+      items: [
+        {
+          medicineId: medicineData?.data.id || "",
+          quantity: quantity,
+        },
+      ],
+    });
+    console.log(_data);
   };
 
   return (
@@ -138,7 +150,7 @@ export default function MedicineDetailsPage() {
                   onClick={handleAddToCart}
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+                  Order Now
                 </Button>
 
                 <Button
