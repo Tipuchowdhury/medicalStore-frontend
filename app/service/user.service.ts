@@ -17,10 +17,8 @@ export const userService = {
       if (session === null) {
         return { data: null, error: { message: "No active session" } };
       }
-      console.log(session);
       return { data: session, error: null };
     } catch (error) {
-      console.log(error);
       return { data: null, error: { message: "Failed to fetch session" } };
     }
   },
