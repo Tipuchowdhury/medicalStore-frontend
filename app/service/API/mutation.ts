@@ -7,7 +7,6 @@ export function useCreateOrderMutation() {
   return useMutation({
     mutationFn: (data: createMedicineType) => createOrder(data),
     onError: () => {
-      console.log("errroooooooooooooooo");
       toast.error("Order Creation Failed");
     },
     onSuccess: () => {

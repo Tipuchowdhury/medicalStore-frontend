@@ -31,13 +31,13 @@ import {
 
 export default function MedicinesPage() {
   const { data: session, isPending } = authClient.useSession();
-  console.log(session);
+
   const { data: medicinesData, isLoading } = useGetMedicineForSeller();
-  console.log(medicinesData);
+
   const medicineforSeller = medicinesData?.data.filter(
     (med: any) => med.sellerId === session?.user.id,
   );
-  console.log(medicineforSeller);
+
   const [medicines, setMedicines] = useState([
     {
       id: 1,

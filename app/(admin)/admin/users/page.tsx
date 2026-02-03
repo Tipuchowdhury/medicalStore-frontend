@@ -34,7 +34,6 @@ import { userType } from "@/types/allTypes";
 
 export default function AdminUsersPage() {
   const { data: allUsers, isLoading } = useGetAllUsers();
-  console.log(allUsers);
   const [users, setUsers] = useState([
     {
       id: 1,

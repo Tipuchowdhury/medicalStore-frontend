@@ -42,7 +42,6 @@ export default function ShopPage() {
   maxPriceOfMed = data?.data?.reduce((max: number, med: medicineTypes) => {
     return med.price > max ? med.price : max;
   }, 0);
-  console.log(categories);
   const filtered = data?.data?.filter((medicine: medicineTypes) => {
     const matchesCategory =
       !selectedCategory || medicine.category.name === selectedCategory;
@@ -50,8 +49,7 @@ export default function ShopPage() {
     //   medicine.price >= priceRange[0] && medicine.price <= priceRange[1];
     return matchesCategory;
   });
-  console.log(filtered);
-  console.log(maxPriceOfMed);
+
   return (
     <>
       <Header />

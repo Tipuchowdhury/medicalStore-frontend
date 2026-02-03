@@ -9,7 +9,6 @@ import { homeService } from "./service/home.service";
 export default async function Home() {
   const { data } = await homeService.getCategories();
   const { data: medicine } = await homeService.getMedicines();
-  console.log(data);
   return (
     <>
       <Header />

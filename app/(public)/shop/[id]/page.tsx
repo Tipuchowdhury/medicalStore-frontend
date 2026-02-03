@@ -23,15 +23,12 @@ export default function MedicineDetailsPage() {
   const router = useRouter();
   const createOrderMutation = useCreateOrderMutation();
   const { data: medicineData, isLoading } = useGetMedicineById(id as string);
-  console.log(medicineData);
-  console.log(id);
 
   const [quantity, setQuantity] = useState(1);
   // Mock medicine data
 
   const handleAddToCart = () => {
     // toast.success(`Added ${quantity} ${medicine.name} to cart`);
-    console.log(medicineData?.data);
     const _data = createOrderMutation.mutate({
       items: [
         {

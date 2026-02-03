@@ -35,7 +35,6 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       provider: "google",
       callbackURL: process.env.NEXT_PUBLIC_FRONTEND_URL,
     });
-    console.log(data);
   };
   const form = useForm({
     defaultValues: {
@@ -46,7 +45,6 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       onSubmit: formSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log(value);
       const toastId = toast.loading("Logging your account...");
       try {
         const { data, error } = await authClient.signIn.email(value);

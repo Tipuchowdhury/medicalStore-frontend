@@ -27,7 +27,6 @@ import { useGetOrderForSeller } from "@/app/service/API/shop-page-api/api";
 
 export default function SellerOrdersPage() {
   const { data: ordersData, isLoading } = useGetOrderForSeller();
-  console.log(ordersData);
   const [orders, setOrders] = useState([
     {
       id: "ORD-001",
