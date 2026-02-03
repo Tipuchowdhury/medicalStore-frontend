@@ -49,3 +49,10 @@ export const createOrder = async (data: createMedicineType) => {
     throw error;
   }
 };
+
+export const getAllMedicineBySeller = async () => {
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/medicine/`,
+  );
+  return result.json();
+};

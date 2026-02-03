@@ -1,5 +1,6 @@
 import {
   getAllCaterogy,
+  getAllMedicineBySeller,
   getMedicineByID,
   getMedicines,
 } from "@/app/hooks/shop-page/query";
@@ -30,5 +31,12 @@ export const useGetMedicineById = (id: string) => {
   return useQuery({
     queryKey: ["medicine-by-id", id],
     queryFn: () => getMedicineByID(id),
+  });
+};
+
+export const useGetMedicineForSeller = () => {
+  return useQuery({
+    queryKey: ["medicine-by-id-for-seller"],
+    queryFn: () => getAllMedicineBySeller(),
   });
 };

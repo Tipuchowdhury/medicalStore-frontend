@@ -17,7 +17,6 @@ import { authClient } from "@/app/lib/auth-client";
 
 export function Header() {
   const { data: session, isPending } = authClient.useSession();
-  console.log(session);
   const role = (session?.user as any)?.role ?? "CUSTOMER";
   const isLoggedIn = Boolean(session?.user);
 

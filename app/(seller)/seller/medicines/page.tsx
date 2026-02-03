@@ -23,8 +23,21 @@ import {
 } from "@/components/ui/dialog";
 import { Edit2, Trash2, Plus } from "lucide-react";
 import { toast } from "sonner";
+import { authClient } from "@/app/lib/auth-client";
+import {
+  useGetMedicineForSeller,
+  useGetMedicines,
+} from "@/app/service/API/shop-page-api/api";
 
 export default function MedicinesPage() {
+  const { data: session, isPending } = authClient.useSession();
+  console.log(session);
+  const { data: medicinesData, isLoading } = useGetMedicineForSeller();
+  console.log(medicinesData);
+  const medicineforSeller = medicinesData?.data.filter(
+    (med: any) => med.sellerId === session?.user.id,
+  );
+  console.log(medicineforSeller);
   const [medicines, setMedicines] = useState([
     {
       id: 1,
@@ -174,20 +187,22 @@ export default function MedicinesPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {medicines.map((medicine) => (
+                    {medicineforSeller?.map((medicine: any) => (
                       <TableRow key={medicine.id}>
                         <TableCell className="font-medium">
                           {medicine.name}
                         </TableCell>
-                        <TableCell>{medicine.category}</TableCell>
+                        <TableCell>{medicine.category.name}</TableCell>
                         <TableCell>${medicine.price}</TableCell>
                         <TableCell>
                           <Badge
                             variant={
-                              medicine.stock < 20 ? "destructive" : "secondary"
+                              medicine.quantity < 20
+                                ? "destructive"
+                                : "secondary"
                             }
                           >
-                            {medicine.stock} units
+                            {medicine.quantity} units
                           </Badge>
                         </TableCell>
                         <TableCell>⭐ {medicine.rating}</TableCell>
