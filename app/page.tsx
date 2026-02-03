@@ -9,13 +9,15 @@ import { homeService } from "./service/home.service";
 export default async function Home() {
   const { data } = await homeService.getCategories();
   const { data: medicine } = await homeService.getMedicines();
+  const catData = data?.data || [];
+  const medData = medicine?.data || [];
   return (
     <>
       <Header />
       <main className="min-h-screen bg-background">
         <HeroSection />
-        <CategorySection data={data?.data} />
-        <FeatureProduct medicine={medicine?.data} />
+        <CategorySection data={catData} />
+        <FeatureProduct medicine={medData} />
         <Seller />
       </main>
       <Footer />

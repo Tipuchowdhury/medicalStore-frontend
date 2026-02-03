@@ -42,7 +42,8 @@ export default function ShopPage() {
   maxPriceOfMed = data?.data?.reduce((max: number, med: medicineTypes) => {
     return med.price > max ? med.price : max;
   }, 0);
-  const filtered = data?.data?.filter((medicine: medicineTypes) => {
+  const med = data?.data || [];
+  const filtered = med.filter((medicine: medicineTypes) => {
     const matchesCategory =
       !selectedCategory || medicine.category.name === selectedCategory;
     // const matchesPrice =
