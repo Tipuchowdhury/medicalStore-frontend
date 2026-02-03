@@ -18,36 +18,6 @@ interface medicineType {
 }
 
 const FeatureProduct = ({ medicine }: { medicine: medicineType[] }) => {
-  const featured = [
-    {
-      id: 1,
-      name: "Aspirin 500mg",
-      price: "$5.99",
-      category: "Pain Relief",
-      rating: 4.5,
-    },
-    {
-      id: 2,
-      name: "Cough Syrup",
-      price: "$8.99",
-      category: "Cold & Flu",
-      rating: 4.2,
-    },
-    {
-      id: 3,
-      name: "Vitamin C 1000mg",
-      price: "$12.99",
-      category: "Vitamins",
-      rating: 4.7,
-    },
-    {
-      id: 4,
-      name: "Bandage Box",
-      price: "$4.99",
-      category: "First Aid",
-      rating: 4.3,
-    },
-  ];
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-muted">
       <div className="max-w-6xl mx-auto">

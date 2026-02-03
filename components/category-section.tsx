@@ -7,15 +7,6 @@ interface categoryType {
 }
 
 const CategorySection = ({ data }: { data: categoryType[] }) => {
-  console.log(data);
-  const categories = [
-    { id: 1, name: "Pain Relief", icon: "💊" },
-    { id: 2, name: "Cold & Flu", icon: "🤧" },
-    { id: 3, name: "Digestive", icon: "🩹" },
-    { id: 4, name: "Vitamins", icon: "💊" },
-    { id: 5, name: "First Aid", icon: "🏥" },
-    { id: 6, name: "Skincare", icon: "✨" },
-  ];
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
