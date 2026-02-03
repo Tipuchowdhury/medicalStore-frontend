@@ -3,7 +3,7 @@
 import React from "react";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
   LayoutDashboard,
@@ -14,6 +14,7 @@ import {
   LogOut,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { authClient } from "@/app/lib/auth-client";
 
 interface NavItem {
   label: string;
@@ -28,7 +29,7 @@ interface SidebarProps {
 
 export function Sidebar({ role }: SidebarProps) {
   const pathname = usePathname();
-
+  const router = useRouter();
   const sellerNav: NavItem[] = [
     {
       label: "Dashboard",
@@ -77,6 +78,11 @@ export function Sidebar({ role }: SidebarProps) {
 
   const navItems = role === "seller" ? sellerNav : adminNav;
 
+  const handleLogout = async () => {
+    await authClient.signOut();
+    router.push("/login");
+  };
+
   return (
     <div className="w-64 border-r bg-muted min-h-screen p-6 sticky top-16">
       <div className="space-y-1">
@@ -100,6 +106,7 @@ export function Sidebar({ role }: SidebarProps) {
         <Button
           variant="ghost"
           className="w-full justify-start text-destructive hover:text-destructive"
+          onClick={handleLogout}
         >
           <LogOut className="w-5 h-5" />
           <span className="ml-2">Logout</span>
