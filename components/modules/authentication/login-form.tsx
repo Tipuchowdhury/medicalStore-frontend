@@ -138,7 +138,7 @@ export function LoginForm({ ...props }: React.ComponentProps<typeof Card>) {
       </CardContent>
       <CardFooter className="w-full flex flex-col gap-3">
         <Button form="register-form" type="submit" className="w-full">
-          Register
+          Login
         </Button>
         <Button
           className="w-full"

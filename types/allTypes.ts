@@ -20,3 +20,12 @@ export interface createMedicineType {
     },
   ];
 }
+
+export interface userType {
+  id: string;
+  email: string;
+  name: string;
+  phone: string;
+  role: "CUSTOMER" | "SELLER" | "ADMIN";
+  status: "Active" | "Inactive";
+}

@@ -23,13 +23,21 @@ export const getMedicines = async (params: {
 };
 
 export const getAllCaterogy = async () => {
-  const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/category`);
+  const result = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_URL}/category`,
+    {
+      credentials: "include",
+    },
+  );
   return result.json();
 };
 
 export const getMedicineByID = async (id: string) => {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/medicine/${id}`,
+    {
+      credentials: "include",
+    },
   );
   return result.json();
 };
@@ -42,6 +50,7 @@ export const createOrder = async (data: createMedicineType) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
+      credentials: "include",
     });
     return result.json();
   } catch (error) {
@@ -53,6 +62,9 @@ export const createOrder = async (data: createMedicineType) => {
 export const getAllMedicineBySeller = async () => {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/medicine/`,
+    {
+      credentials: "include",
+    },
   );
   return result.json();
 };
@@ -60,6 +72,16 @@ export const getAllMedicineBySeller = async () => {
 export const getSellerOrder = async () => {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_BACKEND_URL}/order/seller`,
+    {
+      credentials: "include",
+    },
   );
+  return result.json();
+};
+
+export const getAllUsers = async () => {
+  const result = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/users`, {
+    credentials: "include",
+  });
   return result.json();
 };

@@ -1,6 +1,7 @@
 import {
   getAllCaterogy,
   getAllMedicineBySeller,
+  getAllUsers,
   getMedicineByID,
   getMedicines,
   getSellerOrder,
@@ -46,5 +47,12 @@ export const useGetOrderForSeller = () => {
   return useQuery({
     queryKey: ["order-by-seller"],
     queryFn: () => getSellerOrder(),
+  });
+};
+
+export const useGetAllUsers = () => {
+  return useQuery({
+    queryKey: ["all-users"],
+    queryFn: () => getAllUsers(),
   });
 };

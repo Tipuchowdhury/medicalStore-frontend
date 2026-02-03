@@ -29,8 +29,12 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useGetAllUsers } from "@/app/service/API/shop-page-api/api";
+import { userType } from "@/types/allTypes";
 
 export default function AdminUsersPage() {
+  const { data: allUsers, isLoading } = useGetAllUsers();
+  console.log(allUsers);
   const [users, setUsers] = useState([
     {
       id: 1,
@@ -75,8 +79,8 @@ export default function AdminUsersPage() {
   ]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filtered = users.filter(
-    (u) =>
+  const filtered = allUsers?.data.filter(
+    (u: userType) =>
       u.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       u.email.toLowerCase().includes(searchTerm.toLowerCase()),
   );
@@ -171,7 +175,7 @@ export default function AdminUsersPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {filtered.map((user) => (
+                    {filtered?.map((user: userType) => (
                       <TableRow key={user.id}>
                         <TableCell className="font-medium">
                           {user.name}
@@ -180,9 +184,7 @@ export default function AdminUsersPage() {
                         <TableCell>
                           <Badge variant="outline">{user.role}</Badge>
                         </TableCell>
-                        <TableCell className="text-sm text-muted-foreground">
-                          {user.joinDate}
-                        </TableCell>
+
                         <TableCell>
                           <Badge
                             className={
@@ -201,7 +203,7 @@ export default function AdminUsersPage() {
                                 <MoreVertical className="w-4 h-4" />
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            {/* <DropdownMenuContent align="end">
                               <DropdownMenuItem
                                 onClick={() => toggleUserStatus(user.id)}
                               >
@@ -214,7 +216,7 @@ export default function AdminUsersPage() {
                               >
                                 Delete User
                               </DropdownMenuItem>
-                            </DropdownMenuContent>
+                            </DropdownMenuContent> */}
                           </DropdownMenu>
                         </TableCell>
                       </TableRow>

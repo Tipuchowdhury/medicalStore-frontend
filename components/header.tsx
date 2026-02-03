@@ -14,8 +14,10 @@ import {
 import { ShoppingCart, Search, Menu, User, LogOut } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { authClient } from "@/app/lib/auth-client";
+import { useRouter } from "next/navigation";
 
 export function Header() {
+  const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const role = (session?.user as any)?.role ?? "CUSTOMER";
   const isLoggedIn = Boolean(session?.user);
@@ -23,6 +25,7 @@ export function Header() {
   console.log(role, isLoggedIn);
   const handleLogout = async () => {
     await authClient.signOut();
+    router.push("/login");
   };
 
   return (
