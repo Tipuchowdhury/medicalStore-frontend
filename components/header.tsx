@@ -22,7 +22,9 @@ export function Header() {
   const isLoggedIn = Boolean(session?.user);
 
   console.log(role, isLoggedIn);
-  const handleLogout = () => {};
+  const handleLogout = async () => {
+    await authClient.signOut();
+  };
 
   return (
     <header className="border-b bg-background sticky top-0 z-50">
